@@ -62,12 +62,19 @@
         /// <param name="forceReplace">Forces a replacement in case the file exists in the target folder.</param>
         void MoveFile(string filePath, string sourceFolder, string targetFolder, bool forceReplace);
 
-        /// <summary>
-        /// Reads all text in a file. If file does not exist it will return an empty string.
-        /// </summary>
-        /// <param name="filePath">Path to the file.</param>
-        /// <returns>All Read text.</returns>
-        string ReadAllText(string filePath);
+		/// <summary>
+		/// Opens a binary file, reads the contents of the file into a byte array, and then closes the file.
+		/// </summary>
+		/// <param name="filePath">Path to the file.</param>
+		/// <returns>A byte array containing the contents of the file.</returns>
+		byte[] ReadAllBytes(string filePath);
+
+		/// <summary>
+		/// Reads all text in a file. If file does not exist it will return an empty string.
+		/// </summary>
+		/// <param name="filePath">Path to the file.</param>
+		/// <returns>All Read text.</returns>
+		string ReadAllText(string filePath);
 
         /// <summary>
         /// Reads all text in a file. If file does not exist it will return an empty string.
