@@ -89,7 +89,6 @@
 		/// <inheritdoc />
 		public byte[] ReadAllBytes(string filePath)
 		{
-			AllowWritesOnFile(filePath);
 			if (File.Exists(filePath))
 			{
 				return File.ReadAllBytes(filePath);
