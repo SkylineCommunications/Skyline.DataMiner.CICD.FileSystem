@@ -138,7 +138,22 @@
 			File.WriteAllText(filePath, fileContent);
 		}
 
-		private static void AllowWritesOnFile(string path)
+		public System.IO.FileStream Create(string path)
+		{
+			return File.Create(path);
+		}
+
+		public System.IO.FileStream Create(string path, int bufferSize)
+		{
+			return File.Create(path, bufferSize);
+		}
+
+		public System.IO.FileStream Create(string path, int bufferSize, System.IO.FileOptions options)
+		{
+			return File.Create(path, bufferSize, options);
+		}
+
+        private static void AllowWritesOnFile(string path)
 		{
 			// DirectoryInfo can be created from a file path
 			//FileSecurity fileSec = new FileSecurity(path,AccessControlSections.All);

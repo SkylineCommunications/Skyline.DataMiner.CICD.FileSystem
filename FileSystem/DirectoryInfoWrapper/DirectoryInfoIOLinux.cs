@@ -18,6 +18,12 @@
             FileSystemInfo = _directoryInfo;
         }
 
+        internal DirectoryInfoIOLinux(System.IO.DirectoryInfo directoryInfo)
+        {
+	        _directoryInfo = directoryInfo;
+	        FileSystemInfo = _directoryInfo;
+        }
+
         /// <inheritdoc />
         public string Name => _directoryInfo.Name;
 

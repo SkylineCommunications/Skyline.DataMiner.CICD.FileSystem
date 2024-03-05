@@ -5,6 +5,8 @@ namespace Skyline.DataMiner.CICD.FileSystem
     using System.IO;
     using System.IO.Compression;
     using System.Linq;
+    using Skyline.DataMiner.CICD.FileSystem.DirectoryInfoWrapper;
+    using DirectoryInfo = System.IO.DirectoryInfo;
 
     /// <inheritdoc />
     internal sealed class DirectoryIOLinux : IDirectoryIO
@@ -227,6 +229,12 @@ namespace Skyline.DataMiner.CICD.FileSystem
             {
                 info.Attributes = System.IO.FileAttributes.Normal;
             }
+        }
+
+        public IDirectoryInfoIO CreateDirectory(string path)
+        {
+            var dir = Directory.CreateDirectory(path);
+            return new DirectoryInfoIOLinux(dir);
         }
 
         private void CopyAll(DirectoryInfo source, DirectoryInfo target, string[] ignoreNamesWith = null)

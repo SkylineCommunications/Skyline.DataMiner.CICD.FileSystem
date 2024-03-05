@@ -18,6 +18,12 @@
             FileSystemInfo = _directoryInfo;
         }
 
+        internal DirectoryInfoIOWin(Alphaleonis.Win32.Filesystem.DirectoryInfo directoryInfo)
+        {
+	        _directoryInfo = directoryInfo;
+	        FileSystemInfo = _directoryInfo;
+        }
+
         /// <inheritdoc />
         public string Name => _directoryInfo.Name;
 

@@ -1,6 +1,5 @@
 ﻿namespace Skyline.DataMiner.CICD.FileSystem
 {
-    using System;
     using System.Text;
 
     /// <summary>Provides static methods for the creation, copying, deletion, moving, and opening of a single file, and aids in the creation of <see cref="System.IO.FileStream" /> objects.</summary>
@@ -90,5 +89,74 @@
 		/// <param name="filePath">Path to the file.</param>
 		/// <param name="fileContent">Content for the file.</param>
 		void WriteAllText(string filePath, string fileContent);
+
+		/// <summary>Creates or overwrites a file in the specified path.</summary>
+		/// <param name="path">The path and name of the file to create.</param>
+		/// <exception cref="T:System.UnauthorizedAccessException">The caller does not have the required permission.
+		/// 
+		/// -or-
+		/// 
+		/// <paramref name="path" /> specified a file that is read-only.
+		/// 
+		/// -or-
+		/// 
+		/// <paramref name="path" /> specified a file that is hidden.</exception>
+		/// <exception cref="T:System.ArgumentException">.NET Framework and .NET Core versions older than 2.1: <paramref name="path" /> is a zero-length string, contains only white space, or contains one or more invalid characters. You can query for invalid characters by using the <see cref="M:System.IO.Path.GetInvalidPathChars" /> method.</exception>
+		/// <exception cref="T:System.ArgumentNullException">
+		/// <paramref name="path" /> is <see langword="null" />.</exception>
+		/// <exception cref="T:System.IO.PathTooLongException">The specified path, file name, or both exceed the system-defined maximum length.</exception>
+		/// <exception cref="T:System.IO.DirectoryNotFoundException">The specified path is invalid (for example, it is on an unmapped drive).</exception>
+		/// <exception cref="T:System.IO.IOException">An I/O error occurred while creating the file.</exception>
+		/// <exception cref="T:System.NotSupportedException">
+		/// <paramref name="path" /> is in an invalid format.</exception>
+		/// <returns>A <see cref="T:System.IO.FileStream" /> that provides read/write access to the file specified in <paramref name="path" />.</returns>
+        System.IO.FileStream Create(string path);
+
+        /// <summary>Creates or overwrites a file in the specified path, specifying a buffer size.</summary>
+        /// <param name="path">The path and name of the file to create.</param>
+        /// <param name="bufferSize">The number of bytes buffered for reads and writes to the file.</param>
+        /// <exception cref="T:System.UnauthorizedAccessException">The caller does not have the required permission.
+        /// 
+        /// -or-
+        /// 
+        /// <paramref name="path" /> specified a file that is read-only.
+        /// 
+        /// -or-
+        /// 
+        /// <paramref name="path" /> specified a file that is hidden.</exception>
+        /// <exception cref="T:System.ArgumentException">.NET Framework and .NET Core versions older than 2.1: <paramref name="path" /> is a zero-length string, contains only white space, or contains one or more invalid characters. You can query for invalid characters by using the <see cref="M:System.IO.Path.GetInvalidPathChars" /> method.</exception>
+        /// <exception cref="T:System.ArgumentNullException">
+        /// <paramref name="path" /> is <see langword="null" />.</exception>
+        /// <exception cref="T:System.IO.PathTooLongException">The specified path, file name, or both exceed the system-defined maximum length.</exception>
+        /// <exception cref="T:System.IO.DirectoryNotFoundException">The specified path is invalid (for example, it is on an unmapped drive).</exception>
+        /// <exception cref="T:System.IO.IOException">An I/O error occurred while creating the file.</exception>
+        /// <exception cref="T:System.NotSupportedException">
+        /// <paramref name="path" /> is in an invalid format.</exception>
+        /// <returns>A <see cref="T:System.IO.FileStream" /> with the specified buffer size that provides read/write access to the file specified in <paramref name="path" />.</returns>
+        System.IO.FileStream Create(string path, int bufferSize);
+
+        /// <summary>Creates or overwrites a file in the specified path, specifying a buffer size and options that describe how to create or overwrite the file.</summary>
+        /// <param name="path">The path and name of the file to create.</param>
+        /// <param name="bufferSize">The number of bytes buffered for reads and writes to the file.</param>
+        /// <param name="options">One of the <see cref="T:System.IO.FileOptions" /> values that describes how to create or overwrite the file.</param>
+        /// <exception cref="T:System.UnauthorizedAccessException">The caller does not have the required permission.
+        /// 
+        /// -or-
+        /// 
+        /// <paramref name="path" /> specified a file that is read-only.
+        /// 
+        /// -or-
+        /// 
+        /// <paramref name="path" /> specified a file that is hidden.</exception>
+        /// <exception cref="T:System.ArgumentException">.NET Framework and .NET Core versions older than 2.1: <paramref name="path" /> is a zero-length string, contains only white space, or contains one or more invalid characters. You can query for invalid characters by using the <see cref="M:System.IO.Path.GetInvalidPathChars" /> method.</exception>
+        /// <exception cref="T:System.ArgumentNullException">
+        /// <paramref name="path" /> is <see langword="null" />.</exception>
+        /// <exception cref="T:System.IO.PathTooLongException">The specified path, file name, or both exceed the system-defined maximum length.</exception>
+        /// <exception cref="T:System.IO.DirectoryNotFoundException">The specified path is invalid (for example, it is on an unmapped drive.</exception>
+        /// <exception cref="T:System.IO.IOException">An I/O error occurred while creating the file.</exception>
+        /// <exception cref="T:System.NotSupportedException">
+        /// <paramref name="path" /> is in an invalid format.</exception>
+        /// <returns>A new file with the specified buffer size.</returns>
+        System.IO.FileStream Create(string path, int bufferSize, System.IO.FileOptions options);
     }
 }
