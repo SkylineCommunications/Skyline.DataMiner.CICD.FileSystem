@@ -247,7 +247,7 @@ namespace Skyline.DataMiner.CICD.FileSystem
                 if (ignoreNamesWith != null && ShouldBeIgnored(diSourceSubDir.Name, ignoreNamesWith))
                     continue;
                 DirectoryInfo nextTargetSubDir = target.CreateSubdirectory(diSourceSubDir.Name);
-                CopyAll(diSourceSubDir, nextTargetSubDir);
+                CopyAll(diSourceSubDir, nextTargetSubDir, ignoreNamesWith);
             }
         }
 
