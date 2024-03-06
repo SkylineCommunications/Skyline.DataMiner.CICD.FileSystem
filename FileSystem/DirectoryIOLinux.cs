@@ -5,6 +5,8 @@ namespace Skyline.DataMiner.CICD.FileSystem
     using System.IO;
     using System.IO.Compression;
     using System.Linq;
+    using Skyline.DataMiner.CICD.FileSystem.DirectoryInfoWrapper;
+    using DirectoryInfo = System.IO.DirectoryInfo;
 
     /// <inheritdoc />
     internal sealed class DirectoryIOLinux : IDirectoryIO
@@ -229,6 +231,12 @@ namespace Skyline.DataMiner.CICD.FileSystem
             }
         }
 
+        public IDirectoryInfoIO CreateDirectory(string path)
+        {
+            var dir = Directory.CreateDirectory(path);
+            return new DirectoryInfoIOLinux(dir);
+        }
+
         private void CopyAll(DirectoryInfo source, DirectoryInfo target, string[] ignoreNamesWith = null)
         {
             Directory.CreateDirectory(target.FullName);
@@ -247,7 +255,7 @@ namespace Skyline.DataMiner.CICD.FileSystem
                 if (ignoreNamesWith != null && ShouldBeIgnored(diSourceSubDir.Name, ignoreNamesWith))
                     continue;
                 DirectoryInfo nextTargetSubDir = target.CreateSubdirectory(diSourceSubDir.Name);
-                CopyAll(diSourceSubDir, nextTargetSubDir);
+                CopyAll(diSourceSubDir, nextTargetSubDir, ignoreNamesWith);
             }
         }
 

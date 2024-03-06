@@ -6,7 +6,7 @@
     using System.IO.Compression;
     using System.Linq;
     using System.Security.AccessControl;
-
+    using Skyline.DataMiner.CICD.FileSystem.DirectoryInfoWrapper;
     using Directory = Alphaleonis.Win32.Filesystem.Directory;
     using DirectoryInfo = Alphaleonis.Win32.Filesystem.DirectoryInfo;
     using FileInfo = Alphaleonis.Win32.Filesystem.FileInfo;
@@ -242,6 +242,12 @@
                 throw new TimeoutException("Could not get write access on: " + path);
             }
         }
+        
+        public IDirectoryInfoIO CreateDirectory(string path)
+        {
+	        var dir = Directory.CreateDirectory(path);
+	        return new DirectoryInfoIOWin(dir);
+        }
 
         private void CopyAll(DirectoryInfo source, DirectoryInfo target, string[] ignoreNamesWith = null)
         {
@@ -261,7 +267,7 @@
                 if (ignoreNamesWith != null && ShouldBeIgnored(diSourceSubDir.Name, ignoreNamesWith))
                     continue;
                 DirectoryInfo nextTargetSubDir = target.CreateSubdirectory(diSourceSubDir.Name);
-                CopyAll(diSourceSubDir, nextTargetSubDir);
+                CopyAll(diSourceSubDir, nextTargetSubDir, ignoreNamesWith);
             }
         }
 
