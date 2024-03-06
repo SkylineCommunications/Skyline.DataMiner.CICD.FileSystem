@@ -1,6 +1,5 @@
 namespace Skyline.DataMiner.CICD.FileSystem
 {
-    using System;
     using System.Collections.Generic;
 
     using Alphaleonis.Win32.Filesystem;

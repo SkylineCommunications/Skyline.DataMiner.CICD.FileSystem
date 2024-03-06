@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-<PropertyGroup>
+  <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>Skyline.DataMiner.CICD.FileSystem</AssemblyName>
     <RootNamespace>Skyline.DataMiner.CICD.FileSystem</RootNamespace>
@@ -14,32 +14,23 @@
     <PackageProjectUrl>https://skyline.be/</PackageProjectUrl>
     <PackageTags>Skyline;DataMiner;CICD</PackageTags>
     <Description>Library providing methods to access the FileSystem on both Unix or Windows systems through a single interface. It also allows manipulation of Windows paths from Linux or Linux paths from Windows. For Windows it also provides support for paths larger than 260 characters.</Description>
-	<PackageReadmeFile>README.md</PackageReadmeFile>
-	<RepositoryUrl>https://github.com/SkylineCommunications/Skyline.DataMiner.CICD.FileSystem</RepositoryUrl>
-	<RepositoryType>git</RepositoryType>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/SkylineCommunications/Skyline.DataMiner.CICD.FileSystem</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
-  
+
   <ItemGroup>
-	  <None Include="..\README.md">
-		  <Pack>True</Pack>
-		  <PackagePath>\</PackagePath>
-	  </None>
-    <None Include="..\_NuGetItems\icon.png">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-	 <None Include="..\_NuGetItems\LICENSE.txt">
-      <Pack>True</Pack>
-     <PackagePath>\</PackagePath>
-    </None>
+    <None Include="..\README.md" Pack="true" PackagePath="" />
+    <None Include="..\_NuGetItems\icon.png" Pack="true" PackagePath="" />
+    <None Include="..\_NuGetItems\LICENSE.txt" Pack="true" PackagePath="" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AlphaFS.New" Version="2.3.0" />
   </ItemGroup>
 
-    <ItemGroup>
-        <InternalsVisibleTo Include="FileSystemTests" />
-    </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="FileSystemTests" />
+  </ItemGroup>
 
 </Project>

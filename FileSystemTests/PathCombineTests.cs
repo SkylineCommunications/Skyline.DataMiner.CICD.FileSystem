@@ -13,7 +13,7 @@
     public class PathCombineTests
     {
         private readonly HashSet<char> _invalidCharacters = new HashSet<char>(System.IO.Path.GetInvalidPathChars());
-        
+
         [TestMethod]
         [DataRow(new[] { "C:\\FolderA\\folderB", "FolderC\\FolderD", "File.xml" }, "C:\\FolderA\\folderB\\FolderC\\FolderD\\File.xml")]
         [DataRow(new[] { "C:\\FolderA\\folderB", "File.xml" }, "C:\\FolderA\\folderB\\File.xml")]

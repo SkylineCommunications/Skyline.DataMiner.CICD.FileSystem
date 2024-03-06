@@ -20,8 +20,8 @@
 
         internal DirectoryInfoIOWin(Alphaleonis.Win32.Filesystem.DirectoryInfo directoryInfo)
         {
-	        _directoryInfo = directoryInfo;
-	        FileSystemInfo = _directoryInfo;
+            _directoryInfo = directoryInfo;
+            FileSystemInfo = _directoryInfo;
         }
 
         /// <inheritdoc />

@@ -1,12 +1,12 @@
-﻿using System;
-using System.Diagnostics;
-using System.Security.AccessControl;
-using System.Security.Principal;
-
-// Do NOT add anything that needs system.IO here
-
-namespace Skyline.DataMiner.CICD.FileSystem
+﻿namespace Skyline.DataMiner.CICD.FileSystem
 {
+    // Do NOT add anything that needs system.IO here
+
+    using System;
+    using System.Diagnostics;
+    using System.Security.AccessControl;
+    using System.Security.Principal;
+
     public static class AccessPermissions
     {
         ///// <summary>

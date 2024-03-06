@@ -61,19 +61,19 @@
         /// <param name="forceReplace">Forces a replacement in case the file exists in the target folder.</param>
         void MoveFile(string filePath, string sourceFolder, string targetFolder, bool forceReplace);
 
-		/// <summary>
-		/// Opens a binary file, reads the contents of the file into a byte array, and then closes the file.
-		/// </summary>
-		/// <param name="filePath">Path to the file.</param>
-		/// <returns>A byte array containing the contents of the file.</returns>
-		byte[] ReadAllBytes(string filePath);
+        /// <summary>
+        /// Opens a binary file, reads the contents of the file into a byte array, and then closes the file.
+        /// </summary>
+        /// <param name="filePath">Path to the file.</param>
+        /// <returns>A byte array containing the contents of the file.</returns>
+        byte[] ReadAllBytes(string filePath);
 
-		/// <summary>
-		/// Reads all text in a file. If file does not exist it will return an empty string.
-		/// </summary>
-		/// <param name="filePath">Path to the file.</param>
-		/// <returns>All Read text.</returns>
-		string ReadAllText(string filePath);
+        /// <summary>
+        /// Reads all text in a file. If file does not exist it will return an empty string.
+        /// </summary>
+        /// <param name="filePath">Path to the file.</param>
+        /// <returns>All Read text.</returns>
+        string ReadAllText(string filePath);
 
         /// <summary>
         /// Reads all text in a file. If file does not exist it will return an empty string.
@@ -83,33 +83,33 @@
         /// <returns></returns>
         string ReadAllText(string filePath, Encoding encoding);
 
-		/// <summary>
-		/// Creates a new file, writes the specified string to the file, and then closes the file. If the target file already exists, it is overwritten.
-		/// </summary>
-		/// <param name="filePath">Path to the file.</param>
-		/// <param name="fileContent">Content for the file.</param>
-		void WriteAllText(string filePath, string fileContent);
+        /// <summary>
+        /// Creates a new file, writes the specified string to the file, and then closes the file. If the target file already exists, it is overwritten.
+        /// </summary>
+        /// <param name="filePath">Path to the file.</param>
+        /// <param name="fileContent">Content for the file.</param>
+        void WriteAllText(string filePath, string fileContent);
 
-		/// <summary>Creates or overwrites a file in the specified path.</summary>
-		/// <param name="path">The path and name of the file to create.</param>
-		/// <exception cref="T:System.UnauthorizedAccessException">The caller does not have the required permission.
-		/// 
-		/// -or-
-		/// 
-		/// <paramref name="path" /> specified a file that is read-only.
-		/// 
-		/// -or-
-		/// 
-		/// <paramref name="path" /> specified a file that is hidden.</exception>
-		/// <exception cref="T:System.ArgumentException">.NET Framework and .NET Core versions older than 2.1: <paramref name="path" /> is a zero-length string, contains only white space, or contains one or more invalid characters. You can query for invalid characters by using the <see cref="M:System.IO.Path.GetInvalidPathChars" /> method.</exception>
-		/// <exception cref="T:System.ArgumentNullException">
-		/// <paramref name="path" /> is <see langword="null" />.</exception>
-		/// <exception cref="T:System.IO.PathTooLongException">The specified path, file name, or both exceed the system-defined maximum length.</exception>
-		/// <exception cref="T:System.IO.DirectoryNotFoundException">The specified path is invalid (for example, it is on an unmapped drive).</exception>
-		/// <exception cref="T:System.IO.IOException">An I/O error occurred while creating the file.</exception>
-		/// <exception cref="T:System.NotSupportedException">
-		/// <paramref name="path" /> is in an invalid format.</exception>
-		/// <returns>A <see cref="T:System.IO.FileStream" /> that provides read/write access to the file specified in <paramref name="path" />.</returns>
+        /// <summary>Creates or overwrites a file in the specified path.</summary>
+        /// <param name="path">The path and name of the file to create.</param>
+        /// <exception cref="T:System.UnauthorizedAccessException">The caller does not have the required permission.
+        /// 
+        /// -or-
+        /// 
+        /// <paramref name="path" /> specified a file that is read-only.
+        /// 
+        /// -or-
+        /// 
+        /// <paramref name="path" /> specified a file that is hidden.</exception>
+        /// <exception cref="T:System.ArgumentException">.NET Framework and .NET Core versions older than 2.1: <paramref name="path" /> is a zero-length string, contains only white space, or contains one or more invalid characters. You can query for invalid characters by using the <see cref="M:System.IO.Path.GetInvalidPathChars" /> method.</exception>
+        /// <exception cref="T:System.ArgumentNullException">
+        /// <paramref name="path" /> is <see langword="null" />.</exception>
+        /// <exception cref="T:System.IO.PathTooLongException">The specified path, file name, or both exceed the system-defined maximum length.</exception>
+        /// <exception cref="T:System.IO.DirectoryNotFoundException">The specified path is invalid (for example, it is on an unmapped drive).</exception>
+        /// <exception cref="T:System.IO.IOException">An I/O error occurred while creating the file.</exception>
+        /// <exception cref="T:System.NotSupportedException">
+        /// <paramref name="path" /> is in an invalid format.</exception>
+        /// <returns>A <see cref="T:System.IO.FileStream" /> that provides read/write access to the file specified in <paramref name="path" />.</returns>
         System.IO.FileStream Create(string path);
 
         /// <summary>Creates or overwrites a file in the specified path, specifying a buffer size.</summary>

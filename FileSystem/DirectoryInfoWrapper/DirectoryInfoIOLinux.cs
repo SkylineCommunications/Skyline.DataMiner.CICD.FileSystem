@@ -20,8 +20,8 @@
 
         internal DirectoryInfoIOLinux(System.IO.DirectoryInfo directoryInfo)
         {
-	        _directoryInfo = directoryInfo;
-	        FileSystemInfo = _directoryInfo;
+            _directoryInfo = directoryInfo;
+            FileSystemInfo = _directoryInfo;
         }
 
         /// <inheritdoc />

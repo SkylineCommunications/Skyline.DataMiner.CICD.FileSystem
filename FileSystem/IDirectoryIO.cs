@@ -187,7 +187,7 @@
         string[] GetFiles(string path, string searchPattern, System.IO.SearchOption searchOption);
 
         // TODO: MOVE THIS TO SYSDEV SOLUTION
-       // string LocalSvnPathToSvnServer(string localFolderPath);
+        // string LocalSvnPathToSvnServer(string localFolderPath);
 
         /// <summary>
         /// Move the content of a directory to a different directory.

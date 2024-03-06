@@ -5,16 +5,16 @@
     {
         /// <summary>Provides a platform-specific alternate character used to separate directory levels in a path string that reflects a hierarchical file system organization.</summary>
         char AltDirectorySeparatorChar { get; }
-        
+
         /// <summary>Provides a platform-specific character used to separate directory levels in a path string that reflects a hierarchical file system organization.</summary>
         char DirectorySeparatorChar { get; }
 
         /// <summary>A platform-specific separator character used to separate path strings in environment variables.</summary>
         char PathSeparator { get; }
-        
+
         /// <summary>Provides a platform-specific volume separator character.</summary>
         char VolumeSeparatorChar { get; }
-        
+
         /// <summary>Changes the extension of a path string.</summary>
         /// <param name="path">The path information to modify.</param>
         /// <param name="extension">The new extension (with or without a leading period). Specify <see langword="null" /> to remove an existing extension from <paramref name="path" />.</param>
@@ -30,7 +30,7 @@
         /// <exception cref="System.ArgumentNullException">One of the strings in the array is <see langword="null" />.</exception>
         /// <returns>The combined paths.</returns>
         string Combine(params string[] paths);
-        
+
         /// <summary>Combines two strings into a path.</summary>
         /// <param name="path1">The first path to combine.</param>
         /// <param name="path2">The second path to combine.</param>
@@ -39,7 +39,7 @@
         /// <paramref name="path1" /> or <paramref name="path2" /> is <see langword="null" />.</exception>
         /// <returns>The combined paths. If one of the specified paths is a zero-length string, this method returns the other path. If <paramref name="path2" /> contains an absolute path, this method returns <paramref name="path2" />.</returns>
         string Combine(string path1, string path2);
-        
+
         /// <summary>Combines three strings into a path.</summary>
         /// <param name="path1">The first path to combine.</param>
         /// <param name="path2">The second path to combine.</param>
@@ -49,7 +49,7 @@
         /// <paramref name="path1" />, <paramref name="path2" />, or <paramref name="path3" /> is <see langword="null" />.</exception>
         /// <returns>The combined paths.</returns>
         string Combine(string path1, string path2, string path3);
-        
+
         /// <summary>Combines four strings into a path.</summary>
         /// <param name="path1">The first path to combine.</param>
         /// <param name="path2">The second path to combine.</param>
@@ -60,7 +60,7 @@
         /// <paramref name="path1" />, <paramref name="path2" />, <paramref name="path3" />, or <paramref name="path4" /> is <see langword="null" />.</exception>
         /// <returns>The combined paths.</returns>
         string Combine(string path1, string path2, string path3, string path4);
-        
+
         /// <summary>Returns the directory information for the specified path.</summary>
         /// <param name="path">The path of a file or directory.</param>
         /// <exception cref="System.ArgumentException">.NET Framework and .NET Core versions older than 2.1: The <paramref name="path" /> parameter contains invalid characters, is empty, or contains only whitespaces.</exception>
@@ -69,25 +69,25 @@
         /// Note: In .NET for Windows Store apps or the Portable Class Library, catch the base class exception, <see cref="System.IO.IOException" />, instead.</exception>
         /// <returns>Directory information for <paramref name="path" />, or <see langword="null" /> if <paramref name="path" /> denotes a root directory or is null. Returns <see cref="System.String.Empty" /> if <paramref name="path" /> does not contain directory information.</returns>
         string GetDirectoryName(string path);
-        
+
         /// <summary>Returns the extension (including the period ".") of the specified path string.</summary>
         /// <param name="path">The path string from which to get the extension.</param>
         /// <exception cref="System.ArgumentException">.NET Framework and .NET Core versions older than 2.1: <paramref name="path" /> contains one or more of the invalid characters defined in <see cref="GetInvalidPathChars" />.</exception>
         /// <returns>The extension of the specified path (including the period "."), or <see langword="null" />, or <see cref="System.String.Empty" />. If <paramref name="path" /> is <see langword="null" />, <see cref="GetExtension(System.String)" /> returns <see langword="null" />. If <paramref name="path" /> does not have extension information, <see cref="GetExtension(System.String)" /> returns <see cref="System.String.Empty" />.</returns>
         string GetExtension(string path);
-        
+
         /// <summary>Returns the file name and extension of the specified path string.</summary>
         /// <param name="path">The path string from which to obtain the file name and extension.</param>
         /// <exception cref="System.ArgumentException">.NET Framework and .NET Core versions older than 2.1: <paramref name="path" /> contains one or more of the invalid characters defined in <see cref="GetInvalidPathChars" />.</exception>
         /// <returns>The characters after the last directory separator character in <paramref name="path" />. If the last character of <paramref name="path" /> is a directory or volume separator character, this method returns <see cref="System.String.Empty" />. If <paramref name="path" /> is <see langword="null" />, this method returns <see langword="null" />.</returns>
         string GetFileName(string path);
-        
+
         /// <summary>Returns the file name of the specified path string without the extension.</summary>
         /// <param name="path">The path of the file.</param>
         /// <exception cref="System.ArgumentException">.NET Framework and .NET Core versions older than 2.1: <paramref name="path" /> contains one or more of the invalid characters defined in <see cref="GetInvalidPathChars" />.</exception>
         /// <returns>The string returned by <see cref="GetFileName(System.String)" />, minus the last period (.) and all characters following it.</returns>
         string GetFileNameWithoutExtension(string path);
-        
+
         /// <summary>Returns the absolute path for the specified path string.</summary>
         /// <param name="path">The file or directory for which to obtain absolute path information.</param>
         /// <exception cref="System.ArgumentException">
@@ -104,15 +104,15 @@
         /// <exception cref="System.IO.PathTooLongException">The specified path, file name, or both exceed the system-defined maximum length.</exception>
         /// <returns>The fully qualified location of <paramref name="path" />, such as "C:\MyFile.txt".</returns>
         string GetFullPath(string path);
-        
+
         /// <summary>Gets an array containing the characters that are not allowed in file names.</summary>
         /// <returns>An array containing the characters that are not allowed in file names.</returns>
         char[] GetInvalidFileNameChars();
-        
+
         /// <summary>Gets an array containing the characters that are not allowed in path names.</summary>
         /// <returns>An array containing the characters that are not allowed in path names.</returns>
         char[] GetInvalidPathChars();
-        
+
         /// <summary>Gets the root directory information from the path contained in the specified string.</summary>
         /// <param name="path">A string containing the path from which to obtain root directory information.</param>
         /// <exception cref="System.ArgumentException">.NET Framework and .NET Core versions older than 2.1: <paramref name="path" /> contains one or more of the invalid characters defined in <see cref="GetInvalidPathChars" />.
@@ -130,11 +130,11 @@
         /// 
         /// <see langword="null" /> if <paramref name="path" /> is <see langword="null" /> or is effectively empty.</returns>
         string GetPathRoot(string path);
-        
+
         /// <summary>Returns a random folder name or file name.</summary>
         /// <returns>A random folder name or file name.</returns>
         string GetRandomFileName();
-        
+
         /// <summary>Creates a uniquely named, zero-byte temporary file on disk and returns the full path of that file.</summary>
         /// <exception cref="System.IO.IOException">An I/O error occurs, such as no unique temporary file name is available.
         /// 
@@ -143,19 +143,19 @@
         ///  This method was unable to create a temporary file.</exception>
         /// <returns>The full path of the temporary file.</returns>
         string GetTempFileName();
-        
+
         /// <summary>Returns the path of the current user's temporary folder.</summary>
         /// <exception cref="System.Security.SecurityException">The caller does not have the required permissions.</exception>
         /// <returns>The path to the temporary folder, ending with a  <see cref="DirectorySeparatorChar" />.</returns>
         string GetTempPath();
-        
+
         /// <summary>Determines whether a path includes a file name extension.</summary>
         /// <param name="path">The path to search for an extension.</param>
         /// <exception cref="System.ArgumentException">.NET Framework and .NET Core versions older than 2.1: <paramref name="path" /> contains one or more of the invalid characters defined in <see cref="GetInvalidPathChars" />.</exception>
         /// <returns>
         /// <see langword="true" /> if the characters that follow the last directory separator (\ or /) or volume separator (:) in the path include a period (.) followed by one or more characters; otherwise, <see langword="false" />.</returns>
         bool HasExtension(string path);
-        
+
         /// <summary>Returns a value indicating whether the specified path string contains a root.</summary>
         /// <param name="path">The path to test.</param>
         /// <exception cref="System.ArgumentException">.NET Framework and .NET Core versions older than 2.1: <paramref name="path" /> contains one or more of the invalid characters defined in <see cref="GetInvalidPathChars" />.</exception>

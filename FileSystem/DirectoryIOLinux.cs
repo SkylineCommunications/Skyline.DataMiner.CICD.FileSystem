@@ -5,7 +5,9 @@ namespace Skyline.DataMiner.CICD.FileSystem
     using System.IO;
     using System.IO.Compression;
     using System.Linq;
+
     using Skyline.DataMiner.CICD.FileSystem.DirectoryInfoWrapper;
+
     using DirectoryInfo = System.IO.DirectoryInfo;
 
     /// <inheritdoc />
