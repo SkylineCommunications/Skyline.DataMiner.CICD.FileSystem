@@ -28,6 +28,7 @@
         [DataRow(new[] { "/github/", "FolderC/FolderD", "File.xml" }, "/github/FolderC/FolderD/File.xml")]
         [DataRow(new[] { "/github", "FolderC/FolderD" }, "/github/FolderC/FolderD")]
         [DataRow(new[] { "/github\\what?", "FolderC/FolderD" }, "/github/what?/FolderC/FolderD")]
+        [DataRow(new[] { "\\\\127.0.0.1\\c$", "skyline dataminer\\test.txt" }, "\\\\127.0.0.1\\c$\\skyline dataminer\\test.txt")]
         public void UniversalCombineTests(string[] paths, string expectedResult)
         {
             var result = PathCombine.UniversalCombine(paths, _invalidCharacters);

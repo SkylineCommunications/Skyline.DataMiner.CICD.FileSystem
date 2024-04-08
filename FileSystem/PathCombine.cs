@@ -24,9 +24,18 @@
             }
 
             List<string> nicePaths = new List<string>();
+            bool startsWithShare = false;
+
             foreach (var path in paths)
             {
-                var splitPath = path.Split(new[] { WindowsSeparator, LinuxSeparator }, StringSplitOptions.RemoveEmptyEntries);
+                string cleanPath = path;
+                if(path.StartsWith(WindowsSeparator+ WindowsSeparator))
+                {
+                    cleanPath = path.TrimStart('\\');
+                    startsWithShare = true;
+                }
+
+                var splitPath = cleanPath.Split(new[] { WindowsSeparator, LinuxSeparator }, StringSplitOptions.RemoveEmptyEntries);
                 nicePaths.AddRange(splitPath.Where(p => !String.IsNullOrWhiteSpace(p)));
             }
 
@@ -36,7 +45,7 @@
             {
                 separator = LinuxSeparator;
             }
-            else if (nicePaths[0].EndsWith(":"))
+            else if (nicePaths[0].EndsWith(":") || startsWithShare)
             {
                 separator = WindowsSeparator;
             }
@@ -46,6 +55,11 @@
             }
 
             var result = String.Join(separator, nicePaths);
+
+            if (startsWithShare)
+            {
+                result = "\\\\" + result;
+            }
 
             if (separator == LinuxSeparator && paths[0].StartsWith(LinuxSeparator))
             {
