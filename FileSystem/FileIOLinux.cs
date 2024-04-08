@@ -8,6 +8,13 @@
     internal sealed class FileIOLinux : IFileIO
     {
         /// <inheritdoc />
+        public void AppendAllText(string filePath, string fileContent)
+        {
+            AllowWritesOnFile(filePath);
+            File.AppendAllText(filePath, fileContent);
+        }
+
+        /// <inheritdoc />
         public void DeleteFile(string path)
         {
             if (File.Exists(path))

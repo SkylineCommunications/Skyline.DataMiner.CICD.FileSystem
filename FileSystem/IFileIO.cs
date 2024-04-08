@@ -6,6 +6,23 @@
     public interface IFileIO
     {
         /// <summary>
+        /// Appends the specified string to the file, creating the file if it does not already exist.
+        /// </summary>
+        /// <param name="filePath">The file to append the specified string to.</param>
+        /// <param name="fileContent">The string to append to the file.</param>
+        /// <exception cref="System.ArgumentNullException"></exception>
+        /// <exception cref="System.ArgumentException"></exception>
+        /// <exception cref="System.NotSupportedException"></exception>
+        /// <exception cref="System.ArgumentOutOfRangeException"></exception>
+        /// <exception cref="System.IO.FileNotFoundException"></exception>
+        /// <exception cref="System.IO.IOException"></exception>
+        /// <exception cref="System.Security.SecurityException"></exception>
+        /// <exception cref="System.IO.DirectoryNotFoundException"></exception>
+        /// <exception cref="System.UnauthorizedAccessException"></exception>
+        /// <exception cref="System.PlatformNotSupportedException"></exception>
+        void AppendAllText(string filePath, string fileContent);
+
+        /// <summary>
         /// Deletes the specified file.
         /// </summary>
         /// <param name="path">Will delete a file.</param>
