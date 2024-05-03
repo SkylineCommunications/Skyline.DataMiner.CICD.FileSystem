@@ -10,7 +10,7 @@
         /// <inheritdoc />
         public void AppendAllText(string filePath, string fileContent)
         {
-            AllowWritesOnFile(filePath);
+            TryAllowWritesOnFile(filePath);
             File.AppendAllText(filePath, fileContent);
         }
 
@@ -19,7 +19,7 @@
         {
             if (File.Exists(path))
             {
-                AllowWritesOnFile(path);
+                TryAllowWritesOnFile(path);
                 File.Delete(path);
             }
         }
@@ -72,7 +72,7 @@
         public void MoveFile(string filePath, string sourceFolder, string targetFolder, bool forceReplace)
         {
             string targetFile = Path.Combine(targetFolder, Path.GetFileName(filePath));
-            AllowWritesOnFile(sourceFolder);
+            TryAllowWritesOnFile(sourceFolder);
 
             if (!File.Exists(targetFile))
             {
@@ -135,7 +135,7 @@
         /// <inheritdoc />
         public void WriteAllText(string filePath, string fileContent)
         {
-            AllowWritesOnFile(filePath);
+            TryAllowWritesOnFile(filePath);
             File.WriteAllText(filePath, fileContent);
         }
 
@@ -154,12 +154,21 @@
             return File.Create(path, bufferSize, options);
         }
 
-        private static void AllowWritesOnFile(string path)
+        private static bool TryAllowWritesOnFile(string path)
         {
-            var file = new FileInfo(path);
-            if (file.Exists)
+            try
             {
-                file.Attributes = FileAttributes.Normal;
+                var file = new FileInfo(path);
+                if (file.Exists)
+                {
+                    file.Attributes = FileAttributes.Normal;
+                }
+
+                return true;
+            }
+            catch
+            {
+                return false;
             }
         }
     }

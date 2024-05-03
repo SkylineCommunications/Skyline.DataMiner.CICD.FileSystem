@@ -13,7 +13,7 @@
         /// <inheritdoc />
         public void AppendAllText(string filePath, string fileContent)
         {
-            AllowWritesOnFile(filePath);
+            TryAllowWritesOnFile(filePath);
             File.AppendAllText(filePath, fileContent);
         }
 
@@ -22,7 +22,7 @@
         {
             if (File.Exists(path))
             {
-                AllowWritesOnFile(path);
+                TryAllowWritesOnFile(path);
                 File.Delete(path);
             }
         }
@@ -77,14 +77,14 @@
 
             if (!File.Exists(targetFile))
             {
-                AllowWritesOnFile(sourceFolder);
+                TryAllowWritesOnFile(sourceFolder);
                 File.Move(filePath, targetFile);
             }
             else
             {
                 if (forceReplace)
                 {
-                    AllowWritesOnFile(sourceFolder);
+                    TryAllowWritesOnFile(sourceFolder);
                     DeleteFile(targetFile);
                     File.Move(filePath, targetFile);
                 }
@@ -99,7 +99,7 @@
         /// <inheritdoc />
         public byte[] ReadAllBytes(string filePath)
         {
-            AllowWritesOnFile(filePath);
+            TryAllowWritesOnFile(filePath);
             if (File.Exists(filePath))
             {
                 return File.ReadAllBytes(filePath);
@@ -113,7 +113,7 @@
         /// <inheritdoc />
         public string ReadAllText(string filePath)
         {
-            AllowWritesOnFile(filePath);
+            TryAllowWritesOnFile(filePath);
             if (File.Exists(filePath))
             {
                 return File.ReadAllText(filePath);
@@ -127,7 +127,7 @@
         /// <inheritdoc />
         public string ReadAllText(string filePath, System.Text.Encoding encoding)
         {
-            AllowWritesOnFile(filePath);
+            TryAllowWritesOnFile(filePath);
             if (File.Exists(filePath))
             {
                 return File.ReadAllText(filePath, encoding);
@@ -141,7 +141,7 @@
         /// <inheritdoc />
         public void WriteAllText(string filePath, string fileContent)
         {
-            AllowWritesOnFile(filePath);
+            TryAllowWritesOnFile(filePath);
             File.WriteAllText(filePath, fileContent);
         }
 
@@ -160,22 +160,31 @@
             return File.Create(path, bufferSize, options);
         }
 
-        private static void AllowWritesOnFile(string path)
+        private static bool TryAllowWritesOnFile(string path)
         {
-            // DirectoryInfo can be created from a file path
-            //FileSecurity fileSec = new FileSecurity(path,AccessControlSections.All);
-            //if (AccessPermissions.HasWritePermissionOnDir(fileSec)) return;
-            var file = new FileInfo(path);
-
-            if (file.Exists)
+            try
             {
-                file.Attributes = System.IO.FileAttributes.Normal;
-            }
+                // DirectoryInfo can be created from a file path
+                //FileSecurity fileSec = new FileSecurity(path,AccessControlSections.All);
+                //if (AccessPermissions.HasWritePermissionOnDir(fileSec)) return;
+                var file = new FileInfo(path);
 
-            //if (!AccessPermissions.WaitOnWritePermission(fileSec, new TimeSpan(0, 0, 10)))
-            //{
-            //    throw new TimeoutException("Could not get write access on: " + path);
-            //}
+                if (file.Exists)
+                {
+                    file.Attributes = System.IO.FileAttributes.Normal;
+                }
+
+                //if (!AccessPermissions.WaitOnWritePermission(fileSec, new TimeSpan(0, 0, 10)))
+                //{
+                //    throw new TimeoutException("Could not get write access on: " + path);
+                //}
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
     }
 }

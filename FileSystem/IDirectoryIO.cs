@@ -218,6 +218,12 @@
         /// <param name="path">Path to the directory</param>
         void AllowWritesOnDirectory(string path);
 
+        /// <summary>
+        /// Allow writes to be performed on the directory and its contents.
+        /// </summary>
+        /// <param name="path">Path to the directory</param>
+        bool TryAllowWritesOnDirectory(string path);
+
         /// <summary>Creates all directories and subdirectories in the specified path unless they already exist.</summary>
         /// <param name="path">The directory to create.</param>
         /// <exception cref="T:System.IO.IOException">The directory specified by <paramref name="path" /> is a file.
