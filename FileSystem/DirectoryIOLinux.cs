@@ -85,7 +85,7 @@ namespace Skyline.DataMiner.CICD.FileSystem
         {
             if (Directory.Exists(path))
             {
-                AllowWritesOnDirectory(path);
+                TryAllowWritesOnDirectory(path);
                 Directory.Delete(path, true);
             }
         }
@@ -166,8 +166,8 @@ namespace Skyline.DataMiner.CICD.FileSystem
         {
             string sourcePath = source.TrimEnd('\\', ' ');
             string targetPath = target.TrimEnd('\\', ' ');
-            AllowWritesOnDirectory(sourcePath);
-            AllowWritesOnDirectory(targetPath);
+            TryAllowWritesOnDirectory(sourcePath);
+            TryAllowWritesOnDirectory(targetPath);
             var files = Directory.EnumerateFiles(sourcePath, "*", SearchOption.AllDirectories)
                 .GroupBy(s => Path.GetDirectoryName(s));
 
@@ -195,8 +195,8 @@ namespace Skyline.DataMiner.CICD.FileSystem
         /// <inheritdoc />
         public void Unzip(string zipPath, string destinationDir)
         {
-            AllowWritesOnDirectory(zipPath);
-            AllowWritesOnDirectory(destinationDir);
+            TryAllowWritesOnDirectory(zipPath);
+            TryAllowWritesOnDirectory(destinationDir);
             ZipFile.ExtractToDirectory(zipPath, destinationDir);
         }
 
@@ -230,6 +230,20 @@ namespace Skyline.DataMiner.CICD.FileSystem
             foreach (var info in directory.GetFileSystemInfos("*", System.IO.SearchOption.AllDirectories))
             {
                 info.Attributes = System.IO.FileAttributes.Normal;
+            }
+        }
+
+        /// <inheritdoc />
+        public bool TryAllowWritesOnDirectory(string path)
+        {
+            try
+            {
+                AllowWritesOnDirectory(path);
+                return true;
+            }
+            catch
+            {
+                return false;
             }
         }
 

@@ -89,7 +89,7 @@
         {
             if (Directory.Exists(path))
             {
-                AllowWritesOnDirectory(path);
+                TryAllowWritesOnDirectory(path);
                 Directory.Delete(path, true);
             }
         }
@@ -170,8 +170,8 @@
         {
             string sourcePath = source.TrimEnd('\\', ' ');
             string targetPath = target.TrimEnd('\\', ' ');
-            AllowWritesOnDirectory(sourcePath);
-            AllowWritesOnDirectory(targetPath);
+            TryAllowWritesOnDirectory(sourcePath);
+            TryAllowWritesOnDirectory(targetPath);
             var files = Directory.EnumerateFiles(sourcePath, "*", SearchOption.AllDirectories)
                 .GroupBy(s => Path.GetDirectoryName(s));
 
@@ -199,8 +199,8 @@
         /// <inheritdoc />
         public void Unzip(string zipPath, string destinationDir)
         {
-            AllowWritesOnDirectory(zipPath);
-            AllowWritesOnDirectory(destinationDir);
+            TryAllowWritesOnDirectory(zipPath);
+            TryAllowWritesOnDirectory(destinationDir);
             ZipFile.ExtractToDirectory(zipPath, destinationDir);
         }
 
@@ -242,6 +242,20 @@
             if (!AccessPermissions.WaitOnWritePermission(fileSec, new TimeSpan(0, 0, 10)))
             {
                 throw new TimeoutException("Could not get write access on: " + path);
+            }
+        }
+
+        /// <inheritdoc />
+        public bool TryAllowWritesOnDirectory(string path)
+        {
+            try
+            {
+                AllowWritesOnDirectory(path);
+                return true;
+            }
+            catch
+            {
+                return false;
             }
         }
 
