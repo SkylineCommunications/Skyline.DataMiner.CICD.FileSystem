@@ -23,10 +23,32 @@
         void AppendAllText(string filePath, string fileContent);
 
         /// <summary>
-        /// Deletes the specified file.
+        /// Deletes the specified file. Won't fail if the location does not exist.
         /// </summary>
         /// <param name="path">Will delete a file.</param>
         void DeleteFile(string path);
+        
+        /// <summary>Deletes the specified file.</summary>
+        /// <param name="path">The name of the file to be deleted. Wildcard characters are not supported.</param>
+        /// <exception cref="T:System.ArgumentException">
+        /// <paramref name="path" /> is a zero-length string, contains only white space, or contains one or more invalid characters as defined by <see cref="F:System.IO.Path.InvalidPathChars" />.</exception>
+        /// <exception cref="T:System.ArgumentNullException">
+        /// <paramref name="path" /> is <see langword="null" />.</exception>
+        /// <exception cref="T:System.IO.DirectoryNotFoundException">The specified path is invalid (for example, it is on an unmapped drive).</exception>
+        /// <exception cref="T:System.IO.IOException">The specified file is in use.
+        /// -or-
+        /// There is an open handle on the file, and the operating system is Windows XP or earlier. This open handle can result from enumerating directories and files. For more information, see How to: Enumerate Directories and Files.</exception>
+        /// <exception cref="T:System.NotSupportedException">
+        /// <paramref name="path" /> is in an invalid format.</exception>
+        /// <exception cref="T:System.IO.PathTooLongException">The specified path, file name, or both exceed the system-defined maximum length.</exception>
+        /// <exception cref="T:System.UnauthorizedAccessException">The caller does not have the required permission.
+        /// -or-
+        /// The file is an executable file that is in use.
+        /// -or-
+        /// <paramref name="path" /> is a directory.
+        /// -or-
+        /// <paramref name="path" /> specified a read-only file.</exception>
+        void Delete(string path);
 
         /// <summary>Determines whether the specified file exists.</summary>
         /// <param name="path">The file to check.</param>
@@ -77,6 +99,23 @@
         /// <param name="targetFolder">The target folder.</param>
         /// <param name="forceReplace">Forces a replacement in case the file exists in the target folder.</param>
         void MoveFile(string filePath, string sourceFolder, string targetFolder, bool forceReplace);
+
+        /// <summary>Moves a specified file to a new location, providing the option to specify a new file name.</summary>
+        /// <param name="sourceFileName">The name of the file to move. Can include a relative or absolute path.</param>
+        /// <param name="destFileName">The new path and name for the file.</param>
+        /// <exception cref="T:System.IO.IOException">The destination file already exists.
+        /// -or-
+        /// <paramref name="sourceFileName" /> was not found.</exception>
+        /// <exception cref="T:System.ArgumentNullException">
+        /// <paramref name="sourceFileName" /> or <paramref name="destFileName" /> is <see langword="null" />.</exception>
+        /// <exception cref="T:System.ArgumentException">
+        /// <paramref name="sourceFileName" /> or <paramref name="destFileName" /> is a zero-length string, contains only white space, or contains invalid characters as defined in <see cref="F:System.IO.Path.InvalidPathChars" />.</exception>
+        /// <exception cref="T:System.UnauthorizedAccessException">The caller does not have the required permission.</exception>
+        /// <exception cref="T:System.IO.PathTooLongException">The specified path, file name, or both exceed the system-defined maximum length.</exception>
+        /// <exception cref="T:System.IO.DirectoryNotFoundException">The path specified in <paramref name="sourceFileName" /> or <paramref name="destFileName" /> is invalid, (for example, it is on an unmapped drive).</exception>
+        /// <exception cref="T:System.NotSupportedException">
+        /// <paramref name="sourceFileName" /> or <paramref name="destFileName" /> is in an invalid format.</exception>
+        void Move(string sourceFileName, string destFileName);
 
         /// <summary>
         /// Opens a binary file, reads the contents of the file into a byte array, and then closes the file.
