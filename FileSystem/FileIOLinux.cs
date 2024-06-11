@@ -19,8 +19,7 @@
         {
             if (File.Exists(path))
             {
-                TryAllowWritesOnFile(path);
-                File.Delete(path);
+                Delete(path);
             }
         }
 
