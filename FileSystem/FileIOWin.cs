@@ -22,9 +22,15 @@
         {
             if (File.Exists(path))
             {
-                TryAllowWritesOnFile(path);
-                File.Delete(path);
+                Delete(path);
             }
+        }
+
+        /// <inheritdoc />
+        public void Delete(string path)
+        {
+            TryAllowWritesOnFile(path);
+            File.Delete(path);
         }
 
         /// <inheritdoc />
@@ -94,6 +100,12 @@
                         "Trying to move a file that already exists: " + targetFile);
                 }
             }
+        }
+
+        /// <inheritdoc />
+        public void Move(string sourceFileName, string destFileName)
+        {
+            File.Move(sourceFileName, destFileName);
         }
 
         /// <inheritdoc />
