@@ -125,7 +125,7 @@
         byte[] ReadAllBytes(string filePath);
 
         /// <summary>
-        /// Creates a new file, writes the specified byte array to the file, and then closes the file. If the target file already exists, it is overwritten
+        /// Creates a new file, writes the specified byte array to the file, and then closes the file. If the target file already exists, it is overwritten.
         /// </summary>
         /// <param name="filePath">Path to the file.</param>
         /// <param name="bytes">The bytes to write to the file.</param>
