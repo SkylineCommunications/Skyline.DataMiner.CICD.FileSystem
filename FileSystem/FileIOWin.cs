@@ -123,6 +123,13 @@
         }
 
         /// <inheritdoc />
+        public void WriteAllBytes(string filePath, byte[] bytes)
+        {
+            TryAllowWritesOnFile(filePath);
+            File.WriteAllBytes(filePath, bytes);
+        }
+
+        /// <inheritdoc />
         public string ReadAllText(string filePath)
         {
             TryAllowWritesOnFile(filePath);
