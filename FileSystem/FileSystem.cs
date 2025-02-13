@@ -42,8 +42,5 @@ namespace Skyline.DataMiner.CICD.FileSystem
 
         /// <summary>Performs operations on <see cref="System.String" /> instances that contain file or directory path information. These operations are performed in a cross-platform manner.</summary>
         public IPathIO Path { get; }
-
-        /// <inheritdoc />
-        public IOsSpecificHelper OsSpecificHelper { get; } = new OsSpecificHelper();
     }
 }

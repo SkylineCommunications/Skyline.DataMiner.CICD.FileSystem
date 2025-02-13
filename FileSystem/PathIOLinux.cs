@@ -3,6 +3,8 @@ namespace Skyline.DataMiner.CICD.FileSystem
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using System.Runtime.InteropServices;
+    using System.Text.RegularExpressions;
 
     /// <inheritdoc />
     internal sealed class PathIOLinux : IPathIO
@@ -78,7 +80,7 @@ namespace Skyline.DataMiner.CICD.FileSystem
         public bool IsPathRooted(string path) => SeparatorWrapper(Path.IsPathRooted, path);
 
         /// <inheritdoc />
-        public string ReplaceInvalidCharsForFileName(string filename, string replacement = "_")
+        public string ReplaceInvalidCharsForFileName(string filename, OSPlatform platform, string replacement = "_")
         {
             if (filename is null)
             {
@@ -95,12 +97,29 @@ namespace Skyline.DataMiner.CICD.FileSystem
                 throw new ArgumentException("Value cannot be null or whitespace.", nameof(filename));
             }
 
-            string cleaned = String.Join(replacement, filename.Split(Path.GetInvalidFileNameChars()));
+            if (platform == OSPlatform.Windows)
+            {
+                // !! Can't use Path.GetInvalidFileNameChars() which is different if run on linux.
+                // Does mean that not all characters are covered though (unicode, line endings, ...)
 
-            // Trim trailing dots and spaces, as they are also invalid in filenames
-            cleaned = cleaned.TrimEnd('.', ' ');
+                // Regex to remove invalid characters for Windows filenames
+                string cleaned = Regex.Replace(filename, @"[<>:""/\\|?*\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09\x0A\x0B\x0C\x0D\x0E\x0F\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1A\x1B\x1C\x1D\x1E\x1F]", replacement);
 
-            return cleaned;
+                // Trim trailing dots and spaces, as they are also invalid in filenames
+                cleaned = cleaned.TrimEnd('.', ' ');
+
+                return cleaned;
+            }
+            else
+            {
+                return String.Join(replacement, filename.Split(Path.GetInvalidFileNameChars()));
+            }
+        }
+
+        /// <inheritdoc />
+        public string ReplaceInvalidCharsForFileName(string filename, string replacement = "_")
+        {
+            return ReplaceInvalidCharsForFileName(filename, OSPlatform.Linux, replacement);
         }
 
         private static string ChangeExtensionWrapper(Func<string, string, string> changeExtensionCall, string path, string extension)
