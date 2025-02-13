@@ -119,6 +119,12 @@
         }
 
         /// <inheritdoc />
+        public void WriteAllBytes(string filePath, byte[] bytes)
+        {
+            File.WriteAllBytes(filePath, bytes);
+        }
+
+        /// <inheritdoc />
         public string ReadAllText(string filePath)
         {
             if (File.Exists(filePath))
