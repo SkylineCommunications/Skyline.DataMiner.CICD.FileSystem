@@ -1,6 +1,9 @@
 namespace Skyline.DataMiner.CICD.FileSystem
 {
+    using System;
     using System.Collections.Generic;
+    using System.Runtime.InteropServices;
+    using System.Text.RegularExpressions;
 
     using Alphaleonis.Win32.Filesystem;
 
@@ -74,6 +77,48 @@ namespace Skyline.DataMiner.CICD.FileSystem
 
         /// <inheritdoc />
         public bool IsPathRooted(string path) => Path.IsPathRooted(path);
+
+        /// <inheritdoc />
+        public string ReplaceInvalidCharsForFileName(string filename, OSPlatform platform, string replacement = "_")
+        {
+            if (filename is null)
+            {
+                throw new ArgumentNullException(nameof(filename));
+            }
+
+            if (replacement is null)
+            {
+                throw new ArgumentNullException(nameof(replacement));
+            }
+
+            if (String.IsNullOrWhiteSpace(filename))
+            {
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(filename));
+            }
+
+            if (platform == OSPlatform.Windows)
+            {
+                string cleaned = String.Join(replacement, filename.Split(Path.GetInvalidFileNameChars()));
+
+                // Trim trailing dots and spaces, as they are also invalid in filenames
+                cleaned = cleaned.TrimEnd('.', ' ');
+
+                return cleaned;
+            }
+            else
+            {
+                // !! Can't use Path.GetInvalidFileNameChars() which is different if run on windows.
+
+                // Regex to remove invalid characters for Linux filenames
+                return Regex.Replace(filename, "[\x00\x2F]", replacement);
+            }
+        }
+
+        /// <inheritdoc />
+        public string ReplaceInvalidCharsForFileName(string filename, string replacement = "_")
+        {
+            return ReplaceInvalidCharsForFileName(filename, OSPlatform.Windows, replacement);
+        }
 
         private static string PathSplitCombined(params string[] paths)
         {
