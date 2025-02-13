@@ -79,6 +79,21 @@ namespace Skyline.DataMiner.CICD.FileSystem
         /// <inheritdoc />
         public string ReplaceInvalidCharsForFileName(string filename, string replacement = "_")
         {
+            if (filename is null)
+            {
+                throw new ArgumentNullException(nameof(filename));
+            }
+
+            if (replacement is null)
+            {
+                throw new ArgumentNullException(nameof(replacement));
+            }
+
+            if (String.IsNullOrWhiteSpace(filename))
+            {
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(filename));
+            }
+
             string cleaned = String.Join(replacement, filename.Split(Path.GetInvalidFileNameChars()));
 
             // Trim trailing dots and spaces, as they are also invalid in filenames

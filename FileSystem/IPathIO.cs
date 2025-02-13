@@ -1,5 +1,7 @@
 ﻿namespace Skyline.DataMiner.CICD.FileSystem
 {
+    using System;
+
     /// <summary>Performs operations on <see cref="System.String" /> instances that contain file or directory path information. These operations are performed in a cross-platform manner.</summary>
     public interface IPathIO
     {
@@ -169,6 +171,8 @@
         /// <param name="filename">The file name with extension included</param>
         /// <param name="replacement">Replacement character.</param>
         /// <returns>Cleaned string without invalid characters</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="filename" /> or <paramref name="replacement" /> is <see langword="null" />.</exception>
+        /// <exception cref="ArgumentException">Value cannot be null or whitespace.</exception>
         string ReplaceInvalidCharsForFileName(string filename, string replacement = "_");
     }
 }

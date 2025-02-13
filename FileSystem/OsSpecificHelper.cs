@@ -12,14 +12,14 @@ namespace Skyline.DataMiner.CICD.FileSystem
                 throw new ArgumentNullException(nameof(filename));
             }
 
-            if (String.IsNullOrWhiteSpace(filename))
-            {
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(filename));
-            }
-
             if (replacement is null)
             {
                 throw new ArgumentNullException(nameof(replacement));
+            }
+
+            if (String.IsNullOrWhiteSpace(filename))
+            {
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(filename));
             }
 
             // !! Can't use ReplaceInvalidCharsForFileName as that uses the Path.GetInvalidFileNameChars() which is different if run on linux.
