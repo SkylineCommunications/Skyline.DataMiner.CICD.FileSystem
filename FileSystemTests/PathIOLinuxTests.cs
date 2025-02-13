@@ -1,5 +1,9 @@
 ﻿namespace Skyline.DataMiner.CICD.FileSystem.Tests
 {
+    using System.Runtime.InteropServices;
+
+    using FluentAssertions;
+
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
@@ -214,6 +218,32 @@
             var result = linux.IsPathRooted(pathToTest);
 
             Assert.IsTrue(result);
+        }
+
+        [DataRow("NormalFile.ext", "NormalFile.ext")]
+        [DataRow("File with spaces.ext", "File with spaces.ext")]
+        [DataRow("File with spaces and a dot. ext", "File with spaces and a dot. ext")]
+        [DataRow("File with ending dot.ext.", "File with ending dot.ext")]
+        [DataRow("File with ending space.ext ", "File with ending space.ext")]
+        [DataRow("File with ending space and dot.ext. ", "File with ending space and dot.ext")]
+        [DataRow("File with other invalid / chars.ext", "File with other invalid _ chars.ext")] // Linux doesn't have a lot of invalid chars
+        [TestMethod]
+        public void ReplaceInvalidCharsForFileNameTest(string input, string expectedOutput)
+        {
+            if (!RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            {
+                Assert.Inconclusive("Can't give accurate results on non-linux systems.");
+                return;
+            }
+
+            // Arrange
+            PathIOLinux path = new PathIOLinux();
+
+            // Act
+            var result = path.ReplaceInvalidCharsForFileName(input);
+
+            // Assert
+            result.Should().BeEquivalentTo(expectedOutput);
         }
     }
 }

@@ -1,5 +1,6 @@
 namespace Skyline.DataMiner.CICD.FileSystem
 {
+    using System;
     using System.Collections.Generic;
 
     using Alphaleonis.Win32.Filesystem;
@@ -74,6 +75,17 @@ namespace Skyline.DataMiner.CICD.FileSystem
 
         /// <inheritdoc />
         public bool IsPathRooted(string path) => Path.IsPathRooted(path);
+
+        /// <inheritdoc />
+        public string ReplaceInvalidCharsForFileName(string filename, string replacement = "_")
+        {
+            string cleaned = String.Join(replacement, filename.Split(Path.GetInvalidFileNameChars()));
+
+            // Trim trailing dots and spaces, as they are also invalid in filenames
+            cleaned = cleaned.TrimEnd('.', ' ');
+
+            return cleaned;
+        }
 
         private static string PathSplitCombined(params string[] paths)
         {

@@ -162,5 +162,13 @@
         /// <returns>
         /// <see langword="true" /> if <paramref name="path" /> contains a root; otherwise, <see langword="false" />.</returns>
         bool IsPathRooted(string path);
+
+        /// <summary>
+        /// Replaces invalid characters in a filename with a replacement character.
+        /// </summary>
+        /// <param name="filename">The file name with extension included</param>
+        /// <param name="replacement">Replacement character.</param>
+        /// <returns>Cleaned string without invalid characters</returns>
+        string ReplaceInvalidCharsForFileName(string filename, string replacement = "_");
     }
 }

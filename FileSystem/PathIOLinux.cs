@@ -77,6 +77,17 @@ namespace Skyline.DataMiner.CICD.FileSystem
         /// <inheritdoc />
         public bool IsPathRooted(string path) => SeparatorWrapper(Path.IsPathRooted, path);
 
+        /// <inheritdoc />
+        public string ReplaceInvalidCharsForFileName(string filename, string replacement = "_")
+        {
+            string cleaned = String.Join(replacement, filename.Split(Path.GetInvalidFileNameChars()));
+
+            // Trim trailing dots and spaces, as they are also invalid in filenames
+            cleaned = cleaned.TrimEnd('.', ' ');
+
+            return cleaned;
+        }
+
         private static string ChangeExtensionWrapper(Func<string, string, string> changeExtensionCall, string path, string extension)
         {
             if (changeExtensionCall == null)
