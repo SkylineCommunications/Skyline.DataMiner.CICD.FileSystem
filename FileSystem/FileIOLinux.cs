@@ -172,6 +172,16 @@
             return File.Create(path, bufferSize, options);
         }
 
+        public void Copy(string sourcePath, string destinationPath)
+        {
+            Copy(sourcePath, destinationPath, false);
+        }
+
+        public void Copy(string sourcePath, string destinationPath, bool overwrite)
+        {
+            File.Copy(sourcePath, destinationPath, overwrite);
+        }
+
         private static bool TryAllowWritesOnFile(string path)
         {
             try

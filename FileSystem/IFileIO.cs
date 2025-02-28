@@ -27,7 +27,7 @@
         /// </summary>
         /// <param name="path">Will delete a file.</param>
         void DeleteFile(string path);
-        
+
         /// <summary>Deletes the specified file.</summary>
         /// <param name="path">The name of the file to be deleted. Wildcard characters are not supported.</param>
         /// <exception cref="T:System.ArgumentException">
@@ -221,5 +221,37 @@
         /// <paramref name="path" /> is in an invalid format.</exception>
         /// <returns>A new file with the specified buffer size.</returns>
         System.IO.FileStream Create(string path, int bufferSize, System.IO.FileOptions options);
+
+        /// <summary>
+        /// Copies an existing file to a new file.
+        /// An exception is raised if the destination file already exists.
+        /// </summary>
+        /// <exception cref="T:System.ArgumentException" />
+        /// <exception cref="T:System.ArgumentNullException" />
+        /// <exception cref="T:System.IO.DirectoryNotFoundException" />
+        /// <exception cref="T:System.IO.FileNotFoundException" />
+        /// <exception cref="T:System.IO.IOException" />
+        /// <exception cref="T:System.NotSupportedException" />
+        /// <exception cref="T:System.UnauthorizedAccessException" />
+        /// <param name="sourcePath">The file to copy.</param>
+        /// <param name="destinationPath">The name of the destination file. This cannot be a directory or an existing file.</param>
+        void Copy(string sourcePath, string destinationPath);
+
+        /// <summary>
+        /// Copies an existing file to a new file.
+        /// If <paramref name="overwrite"/> is false, an exception will be
+        /// raised if the destination exists. Otherwise, it will be overwritten.
+        /// </summary>
+        /// <exception cref="T:System.ArgumentException" />
+        /// <exception cref="T:System.ArgumentNullException" />
+        /// <exception cref="T:System.IO.DirectoryNotFoundException" />
+        /// <exception cref="T:System.IO.FileNotFoundException" />
+        /// <exception cref="T:System.IO.IOException" />
+        /// <exception cref="T:System.NotSupportedException" />
+        /// <exception cref="T:System.UnauthorizedAccessException" />
+        /// <param name="sourcePath">The file to copy. </param>
+        /// <param name="destinationPath">The name of the destination file. This cannot be a directory.</param>
+        /// <param name="overwrite"><c>true</c> if the destination file should ignore the read-only and hidden attributes and overwrite; otherwise, <c>false</c>.</param>
+        void Copy(string sourcePath, string destinationPath, bool overwrite);
     }
 }
