@@ -31,10 +31,32 @@
         string CreateTemporaryDirectory();
 
         /// <summary>
-        /// Deletes a directory.
+        /// Deletes a directory if it exists. Won't do anything if the directory does not exist.
+        /// <para>Deletes the recursive directories as well.</para>
         /// </summary>
         /// <param name="path">The path to the directory.</param>
         void DeleteDirectory(string path);
+
+        /// <summary>Deletes an empty directory from a specified path.</summary>
+        /// <exception cref="T:System.ArgumentException" />
+        /// <exception cref="T:System.ArgumentNullException" />
+        /// <exception cref="T:System.IO.DirectoryNotFoundException" />
+        /// <exception cref="T:System.IO.IOException" />
+        /// <exception cref="T:System.NotSupportedException" />
+        /// <exception cref="T:System.UnauthorizedAccessException" />
+        /// <param name="path">The name of the empty directory to remove. This directory must be writable and empty.</param>
+        void Delete(string path);
+
+        /// <summary>Deletes the specified directory and, if indicated, any subdirectories in the directory.</summary>
+        /// <exception cref="T:System.ArgumentException" />
+        /// <exception cref="T:System.ArgumentNullException" />
+        /// <exception cref="T:System.IO.DirectoryNotFoundException" />
+        /// <exception cref="T:System.IO.IOException" />
+        /// <exception cref="T:System.NotSupportedException" />
+        /// <exception cref="T:System.UnauthorizedAccessException" />
+        /// <param name="path">The name of the directory to remove.</param>
+        /// <param name="recursive"><c>true</c> to remove directories, subdirectories, and files in <paramref name="path" />. <c>false</c> otherwise.</param>
+        void Delete(string path, bool recursive);
 
         /// <summary>Returns an enumerable collection of full file names in a specified path.</summary>
         /// <param name="path">The relative or absolute path to the directory to search. This string is not case-sensitive.</param>

@@ -94,6 +94,18 @@
             }
         }
 
+        public void Delete(string path)
+        {
+            TryAllowWritesOnDirectory(path);
+            Directory.Delete(path);
+        }
+
+        public void Delete(string path, bool recursive)
+        {
+            TryAllowWritesOnDirectory(path);
+            Directory.Delete(path, recursive);
+        }
+
         /// <inheritdoc />
         public IEnumerable<string> EnumerateFiles(string path)
         {
