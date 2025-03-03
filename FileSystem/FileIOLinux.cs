@@ -182,6 +182,27 @@
             File.Copy(sourcePath, destinationPath, overwrite);
         }
 
+        public FileStream Open(string path, FileMode mode)
+        {
+            return File.Open(path, mode);
+        }
+
+        public FileStream Open(string path, FileMode mode, FileAccess access)
+        {
+            return File.Open(path, mode, access);
+        }
+
+        /// <summary>Opens a <see cref="T:System.IO.FileStream" /> on the specified path, having the specified mode with read, write, or read/write access and the specified sharing option.</summary>
+        /// <param name="path">The file to open.</param>
+        /// <param name="mode">A <see cref="T:System.IO.FileMode" /> value that specifies whether a file is created if one does not exist, and determines whether the contents of existing files are retained or overwritten.</param>
+        /// <param name="access">A <see cref="T:System.IO.FileAccess" /> value that specifies the operations that can be performed on the file.</param>
+        /// <param name="share">A <see cref="T:System.IO.FileShare" /> value specifying the type of access other threads have to the file.</param>
+        /// <returns>A <see cref="T:System.IO.FileStream" /> on the specified path, having the specified mode with read, write, or read/write access and the specified sharing option.</returns>
+        public FileStream Open(string path, FileMode mode, FileAccess access, FileShare share)
+        {
+            return File.Open(path, mode, access, share);
+        }
+
         private static bool TryAllowWritesOnFile(string path)
         {
             try

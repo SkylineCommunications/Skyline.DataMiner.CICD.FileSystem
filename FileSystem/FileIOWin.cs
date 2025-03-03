@@ -2,7 +2,6 @@
 {
     using System;
     using System.Diagnostics;
-
     using File = Alphaleonis.Win32.Filesystem.File;
     using FileInfo = Alphaleonis.Win32.Filesystem.FileInfo;
     using Path = Alphaleonis.Win32.Filesystem.Path;
@@ -187,6 +186,21 @@
         public void Copy(string sourcePath, string destinationPath, bool overwrite)
         {
             File.Copy(sourcePath, destinationPath, overwrite);
+        }
+
+        public System.IO.FileStream Open(string path, System.IO.FileMode mode)
+        {
+            return File.Open(path, mode);
+        }
+
+        public System.IO.FileStream Open(string path, System.IO.FileMode mode, System.IO.FileAccess access)
+        {
+            return File.Open(path, mode, access);
+        }
+
+        public System.IO.FileStream Open(string path, System.IO.FileMode mode, System.IO.FileAccess access, System.IO.FileShare share)
+        {
+            return File.Open(path, mode, access, share);
         }
 
         private static bool TryAllowWritesOnFile(string path)
