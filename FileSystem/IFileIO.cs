@@ -27,7 +27,7 @@
         /// </summary>
         /// <param name="path">Will delete a file.</param>
         void DeleteFile(string path);
-        
+
         /// <summary>Deletes the specified file.</summary>
         /// <param name="path">The name of the file to be deleted. Wildcard characters are not supported.</param>
         /// <exception cref="T:System.ArgumentException">
@@ -221,5 +221,58 @@
         /// <paramref name="path" /> is in an invalid format.</exception>
         /// <returns>A new file with the specified buffer size.</returns>
         System.IO.FileStream Create(string path, int bufferSize, System.IO.FileOptions options);
+
+        /// <summary>
+        /// Copies an existing file to a new file.
+        /// An exception is raised if the destination file already exists.
+        /// </summary>
+        /// <exception cref="T:System.ArgumentException" />
+        /// <exception cref="T:System.ArgumentNullException" />
+        /// <exception cref="T:System.IO.DirectoryNotFoundException" />
+        /// <exception cref="T:System.IO.FileNotFoundException" />
+        /// <exception cref="T:System.IO.IOException" />
+        /// <exception cref="T:System.NotSupportedException" />
+        /// <exception cref="T:System.UnauthorizedAccessException" />
+        /// <param name="sourcePath">The file to copy.</param>
+        /// <param name="destinationPath">The name of the destination file. This cannot be a directory or an existing file.</param>
+        void Copy(string sourcePath, string destinationPath);
+
+        /// <summary>
+        /// Copies an existing file to a new file.
+        /// If <paramref name="overwrite"/> is false, an exception will be
+        /// raised if the destination exists. Otherwise, it will be overwritten.
+        /// </summary>
+        /// <exception cref="T:System.ArgumentException" />
+        /// <exception cref="T:System.ArgumentNullException" />
+        /// <exception cref="T:System.IO.DirectoryNotFoundException" />
+        /// <exception cref="T:System.IO.FileNotFoundException" />
+        /// <exception cref="T:System.IO.IOException" />
+        /// <exception cref="T:System.NotSupportedException" />
+        /// <exception cref="T:System.UnauthorizedAccessException" />
+        /// <param name="sourcePath">The file to copy. </param>
+        /// <param name="destinationPath">The name of the destination file. This cannot be a directory.</param>
+        /// <param name="overwrite"><c>true</c> if the destination file should ignore the read-only and hidden attributes and overwrite; otherwise, <c>false</c>.</param>
+        void Copy(string sourcePath, string destinationPath, bool overwrite);
+        
+        /// <summary>Opens a <see cref="T:System.IO.FileStream" /> on the specified path with read/write access.</summary>
+        /// <param name="path">The file to open.</param>
+        /// <param name="mode">A <see cref="T:System.IO.FileMode" /> value that specifies whether a file is created if one does not exist, and determines whether the contents of existing files are retained or overwritten.</param>
+        /// <returns>A <see cref="T:System.IO.FileStream" /> opened in the specified mode and path, with read/write access and not shared.</returns>
+        System.IO.FileStream Open(string path, System.IO.FileMode mode);
+
+        /// <summary>Opens a <see cref="T:System.IO.FileStream" /> on the specified path, with the specified mode and access.</summary>
+        /// <param name="path">The file to open.</param>
+        /// <param name="mode">A <see cref="T:System.IO.FileMode" /> value that specifies whether a file is created if one does not exist, and determines whether the contents of existing files are retained or overwritten.</param>
+        /// <param name="access">A <see cref="T:System.IO.FileAccess" /> value that specifies the operations that can be performed on the file.</param>
+        /// <returns>An unshared <see cref="T:System.IO.FileStream" /> that provides access to the specified file, with the specified mode and access.</returns>
+        System.IO.FileStream Open(string path, System.IO.FileMode mode, System.IO.FileAccess access);
+
+        /// <summary>Opens a <see cref="T:System.IO.FileStream" /> on the specified path, having the specified mode with read, write, or read/write access and the specified sharing option.</summary>
+        /// <param name="path">The file to open.</param>
+        /// <param name="mode">A <see cref="T:System.IO.FileMode" /> value that specifies whether a file is created if one does not exist, and determines whether the contents of existing files are retained or overwritten.</param>
+        /// <param name="access">A <see cref="T:System.IO.FileAccess" /> value that specifies the operations that can be performed on the file.</param>
+        /// <param name="share">A <see cref="T:System.IO.FileShare" /> value specifying the type of access other threads have to the file.</param>
+        /// <returns>A <see cref="T:System.IO.FileStream" /> on the specified path, having the specified mode with read, write, or read/write access and the specified sharing option.</returns>
+        System.IO.FileStream Open(string path, System.IO.FileMode mode, System.IO.FileAccess access, System.IO.FileShare share);
     }
 }
