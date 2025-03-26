@@ -31,6 +31,30 @@ namespace Skyline.DataMiner.CICD.FileSystem.DirectoryInfoWrapper
             }
         }
 
+        /// <summary>Initializes a new instance of the <see cref="DirectoryInfo" /> class on the specified path.</summary>
+        /// <param name="directoryInfo">A <see cref="System.IO.DirectoryInfo"/> to convert to the <see cref="IDirectoryInfoIO"/>.</param>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="directoryInfo" /> is <see langword="null" />.</exception>
+        /// <exception cref="System.Security.SecurityException">The caller does not have the required permission.</exception>
+        /// <exception cref="ArgumentException">.NET Framework and .NET Core versions older than 2.1: <paramref name="directoryInfo" /> contains invalid characters such as ", &lt;, &gt;, or |.</exception>
+        /// <exception cref="System.IO.PathTooLongException">The specified path, file name, or both exceed the system-defined maximum length.</exception>
+        public DirectoryInfo(System.IO.DirectoryInfo directoryInfo)
+        {
+            if (directoryInfo is null)
+            {
+                throw new ArgumentNullException(nameof(directoryInfo));
+            }
+
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                _directoryInfo = new DirectoryInfoIOWin(directoryInfo);
+            }
+            else
+            {
+                _directoryInfo = new DirectoryInfoIOLinux(directoryInfo);
+            }
+        }
+
         /// <summary>Gets the name of this <see cref="DirectoryInfo" /> instance.</summary>
         /// <returns>The directory name.</returns>
         public string Name => _directoryInfo.Name;

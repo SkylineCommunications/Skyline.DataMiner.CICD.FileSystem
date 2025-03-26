@@ -9,11 +9,19 @@
     internal sealed class FileInfoIOWin : FileSystemInfoIOWin, IFileInfoIO
     {
         private readonly Alphaleonis.Win32.Filesystem.FileInfo _fileInfo;
-
-        internal FileInfoIOWin(string fileName)
+        
+        internal FileInfoIOWin(Alphaleonis.Win32.Filesystem.FileInfo fileInfo)
         {
-            _fileInfo = new Alphaleonis.Win32.Filesystem.FileInfo(fileName);
+            _fileInfo = fileInfo;
             FileSystemInfo = _fileInfo;
+        }
+
+        internal FileInfoIOWin(string fileName) : this(new Alphaleonis.Win32.Filesystem.FileInfo(fileName))
+        {
+        }
+
+        internal FileInfoIOWin(System.IO.FileInfo fileInfo) : this(new Alphaleonis.Win32.Filesystem.FileInfo(fileInfo.FullName))
+        {
         }
 
         /// <inheritdoc />
@@ -22,7 +30,7 @@
             get
             {
                 var result = _fileInfo.Directory;
-                return result == null ? null : new DirectoryInfoIOWin(result.FullName);
+                return result == null ? null : new DirectoryInfoIOWin(result);
             }
         }
 
@@ -45,14 +53,14 @@
         public IFileInfoIO CopyTo(string destFileName)
         {
             Alphaleonis.Win32.Filesystem.FileInfo result = _fileInfo.CopyTo(destFileName);
-            return new FileInfoIOWin(result.FullName);
+            return new FileInfoIOWin(result);
         }
 
         /// <inheritdoc />
         public IFileInfoIO CopyTo(string destFileName, bool overwrite)
         {
             Alphaleonis.Win32.Filesystem.FileInfo result = _fileInfo.CopyTo(destFileName, overwrite);
-            return new FileInfoIOWin(result.FullName);
+            return new FileInfoIOWin(result);
         }
 
         /// <inheritdoc />
@@ -108,14 +116,14 @@
         public IFileInfoIO Replace(string destinationFileName, string destinationBackupFileName, bool ignoreMetadataErrors)
         {
             Alphaleonis.Win32.Filesystem.FileInfo result = _fileInfo.Replace(destinationFileName, destinationBackupFileName, ignoreMetadataErrors);
-            return new FileInfoIOWin(result.FullName);
+            return new FileInfoIOWin(result);
         }
 
         /// <inheritdoc />
         public IFileInfoIO Replace(string destinationFileName, string destinationBackupFileName)
         {
             Alphaleonis.Win32.Filesystem.FileInfo result = _fileInfo.Replace(destinationFileName, destinationBackupFileName);
-            return new FileInfoIOWin(result.FullName);
+            return new FileInfoIOWin(result);
         }
 
         public override string ToString() => _fileInfo.ToString();

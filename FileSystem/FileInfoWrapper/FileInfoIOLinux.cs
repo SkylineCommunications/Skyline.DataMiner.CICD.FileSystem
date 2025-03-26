@@ -9,11 +9,15 @@
     internal sealed class FileInfoIOLinux : FileSystemInfoIOLinux, IFileInfoIO
     {
         private readonly System.IO.FileInfo _fileInfo;
-
-        internal FileInfoIOLinux(string fileName)
+        
+        internal FileInfoIOLinux(System.IO.FileInfo fileInfo)
         {
-            _fileInfo = new System.IO.FileInfo(fileName);
+            _fileInfo = fileInfo;
             FileSystemInfo = _fileInfo;
+        }
+
+        internal FileInfoIOLinux(string fileName) : this(new System.IO.FileInfo(fileName))
+        {
         }
 
         /// <inheritdoc />
@@ -22,7 +26,7 @@
             get
             {
                 var result = _fileInfo.Directory;
-                return result == null ? null : new DirectoryInfoIOLinux(result.FullName);
+                return result == null ? null : new DirectoryInfoIOLinux(result);
             }
         }
 
@@ -45,14 +49,14 @@
         public IFileInfoIO CopyTo(string destFileName)
         {
             System.IO.FileInfo result = _fileInfo.CopyTo(destFileName);
-            return new FileInfoIOLinux(result.FullName);
+            return new FileInfoIOLinux(result);
         }
 
         /// <inheritdoc />
         public IFileInfoIO CopyTo(string destFileName, bool overwrite)
         {
             System.IO.FileInfo result = _fileInfo.CopyTo(destFileName, overwrite);
-            return new FileInfoIOLinux(result.FullName);
+            return new FileInfoIOLinux(result);
         }
 
         /// <inheritdoc />
@@ -104,14 +108,14 @@
         public IFileInfoIO Replace(string destinationFileName, string destinationBackupFileName, bool ignoreMetadataErrors)
         {
             System.IO.FileInfo result = _fileInfo.Replace(destinationFileName, destinationBackupFileName, ignoreMetadataErrors);
-            return new FileInfoIOLinux(result.FullName);
+            return new FileInfoIOLinux(result);
         }
 
         /// <inheritdoc />
         public IFileInfoIO Replace(string destinationFileName, string destinationBackupFileName)
         {
             System.IO.FileInfo result = _fileInfo.Replace(destinationFileName, destinationBackupFileName);
-            return new FileInfoIOLinux(result.FullName);
+            return new FileInfoIOLinux(result);
         }
 
         public override string ToString() => _fileInfo.ToString();
