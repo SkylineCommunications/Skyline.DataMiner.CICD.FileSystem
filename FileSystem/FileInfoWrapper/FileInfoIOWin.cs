@@ -52,15 +52,29 @@
         /// <inheritdoc />
         public IFileInfoIO CopyTo(string destFileName)
         {
-            Alphaleonis.Win32.Filesystem.FileInfo result = _fileInfo.CopyTo(destFileName);
-            return new FileInfoIOWin(result);
+            /*
+             * https://github.com/alphaleonis/AlphaFS/issues/526
+             * AlphaFS mutates the original FileInfo to the new destination. This deviates from the behavior of System.IO.FileInfo.CopyTo.
+             * As such, we will create a new FileInfo object to do the copy to not change the _fileInfo.
+             */
+            Alphaleonis.Win32.Filesystem.FileInfo temp = new Alphaleonis.Win32.Filesystem.FileInfo(_fileInfo.FullName);
+            temp.CopyTo(destFileName);
+            
+            return this;
         }
 
         /// <inheritdoc />
         public IFileInfoIO CopyTo(string destFileName, bool overwrite)
         {
-            Alphaleonis.Win32.Filesystem.FileInfo result = _fileInfo.CopyTo(destFileName, overwrite);
-            return new FileInfoIOWin(result);
+            /*
+             * https://github.com/alphaleonis/AlphaFS/issues/526
+             * AlphaFS mutates the original FileInfo to the new destination. This deviates from the behavior of System.IO.FileInfo.CopyTo.
+             * As such, we will create a new FileInfo object to do the copy to not change the _fileInfo.
+             */
+            Alphaleonis.Win32.Filesystem.FileInfo temp = new Alphaleonis.Win32.Filesystem.FileInfo(_fileInfo.FullName);
+            temp.CopyTo(destFileName, overwrite);
+
+            return this;
         }
 
         /// <inheritdoc />
