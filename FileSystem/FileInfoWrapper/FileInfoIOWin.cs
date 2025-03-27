@@ -9,7 +9,7 @@
     internal sealed class FileInfoIOWin : FileSystemInfoIOWin, IFileInfoIO
     {
         private readonly Alphaleonis.Win32.Filesystem.FileInfo _fileInfo;
-        
+
         internal FileInfoIOWin(Alphaleonis.Win32.Filesystem.FileInfo fileInfo)
         {
             _fileInfo = fileInfo;
@@ -58,9 +58,9 @@
              * As such, we will create a new FileInfo object to do the copy to not change the _fileInfo.
              */
             Alphaleonis.Win32.Filesystem.FileInfo temp = new Alphaleonis.Win32.Filesystem.FileInfo(_fileInfo.FullName);
-            temp.CopyTo(destFileName);
-            
-            return this;
+            var result = temp.CopyTo(destFileName);
+
+            return new FileInfoIOWin(result);
         }
 
         /// <inheritdoc />
@@ -72,9 +72,9 @@
              * As such, we will create a new FileInfo object to do the copy to not change the _fileInfo.
              */
             Alphaleonis.Win32.Filesystem.FileInfo temp = new Alphaleonis.Win32.Filesystem.FileInfo(_fileInfo.FullName);
-            temp.CopyTo(destFileName, overwrite);
+            var result = temp.CopyTo(destFileName, overwrite);
 
-            return this;
+            return new FileInfoIOWin(result);
         }
 
         /// <inheritdoc />
