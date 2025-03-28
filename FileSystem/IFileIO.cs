@@ -274,5 +274,10 @@
         /// <param name="share">A <see cref="T:System.IO.FileShare" /> value specifying the type of access other threads have to the file.</param>
         /// <returns>A <see cref="T:System.IO.FileStream" /> on the specified path, having the specified mode with read, write, or read/write access and the specified sharing option.</returns>
         System.IO.FileStream Open(string path, System.IO.FileMode mode, System.IO.FileAccess access, System.IO.FileShare share);
+
+        /// <summary>Gets the <see cref="T:System.IO.FileAttributes" /> of the file on the path.</summary>
+        /// <param name="path">The path to the file.</param>
+        /// <returns>The <see cref="T:System.IO.FileAttributes" /> of the file on the path.</returns>
+        System.IO.FileAttributes GetAttributes(string path);
     }
 }

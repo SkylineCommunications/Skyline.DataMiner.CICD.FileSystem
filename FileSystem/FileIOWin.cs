@@ -203,6 +203,11 @@
             return File.Open(path, mode, access, share);
         }
 
+        public System.IO.FileAttributes GetAttributes(string path)
+        {
+            return File.GetAttributes(path);
+        }
+
         private static bool TryAllowWritesOnFile(string path)
         {
             try
