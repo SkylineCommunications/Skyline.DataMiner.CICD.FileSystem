@@ -33,6 +33,33 @@ namespace Skyline.DataMiner.CICD.FileSystem.FileInfoWrapper
             }
         }
 
+        /// <summary>Initializes a new instance of the <see cref="FileInfo" /> class, which acts as a wrapper for a file path.</summary>
+        /// <param name="fileInfo">The <see cref="System.IO.FileInfo"/> to convert to the <see cref="IFileInfoIO"/>.</param>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="fileInfo" /> is <see langword="null" />.</exception>
+        /// <exception cref="System.Security.SecurityException">The caller does not have the required permission.</exception>
+        /// <exception cref="ArgumentException">.NET Framework and .NET Core versions older than 2.1: The file name is empty, contains only white spaces, or contains invalid characters.</exception>
+        /// <exception cref="UnauthorizedAccessException">Access to <paramref name="fileInfo" /> is denied.</exception>
+        /// <exception cref="System.IO.PathTooLongException">The specified path, file name, or both exceed the system-defined maximum length.</exception>
+        /// <exception cref="NotSupportedException">
+        /// <paramref name="fileInfo" /> contains a colon (:) in the middle of the string.</exception>
+        public FileInfo(System.IO.FileInfo fileInfo)
+        {
+            if (fileInfo is null)
+            {
+                throw new ArgumentNullException(nameof(fileInfo));
+            }
+
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                _fileInfo = new FileInfoIOWin(fileInfo);
+            }
+            else
+            {
+                _fileInfo = new FileInfoIOLinux(fileInfo);
+            }
+        }
+
         /// <summary>Gets an instance of the parent directory.</summary>
         /// <exception cref="System.IO.DirectoryNotFoundException">The specified path is invalid, such as being on an unmapped drive.</exception>
         /// <exception cref="System.Security.SecurityException">The caller does not have the required permission.</exception>
