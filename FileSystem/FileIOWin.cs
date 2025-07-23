@@ -185,6 +185,8 @@
 
         public void Copy(string sourcePath, string destinationPath, bool overwrite)
         {
+            TryAllowWritesOnFile(sourcePath);
+            TryAllowWritesOnFile(destinationPath);
             File.Copy(sourcePath, destinationPath, overwrite);
         }
 
