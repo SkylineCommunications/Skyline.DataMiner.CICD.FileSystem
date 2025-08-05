@@ -185,6 +185,8 @@
 
         public void Copy(string sourcePath, string destinationPath, bool overwrite)
         {
+            TryAllowWritesOnFile(sourcePath);
+            TryAllowWritesOnFile(destinationPath);
             File.Copy(sourcePath, destinationPath, overwrite);
         }
 
@@ -206,6 +208,36 @@
         public System.IO.FileAttributes GetAttributes(string path)
         {
             return File.GetAttributes(path);
+        }
+
+        public DateTime GetCreationTime(string path)
+        {
+            return File.GetCreationTime(path);
+        }
+
+        public DateTime GetCreationTimeUtc(string path)
+        {
+            return File.GetCreationTimeUtc(path);
+        }
+
+        public DateTime GetLastWriteTime(string path)
+        {
+            return File.GetLastWriteTime(path);
+        }
+
+        public DateTime GetLastWriteTimeUtc(string path)
+        {
+            return File.GetLastWriteTimeUtc(path);
+        }
+
+        public DateTime GetLastAccessTime(string path)
+        {
+            return File.GetLastAccessTime(path);
+        }
+
+        public DateTime GetLastAccessTimeUtc(string path)
+        {
+            return File.GetLastAccessTimeUtc(path);
         }
 
         private static bool TryAllowWritesOnFile(string path)

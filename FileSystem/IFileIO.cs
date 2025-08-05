@@ -1,5 +1,6 @@
 ﻿namespace Skyline.DataMiner.CICD.FileSystem
 {
+    using System;
     using System.Text;
 
     /// <summary>Provides static methods for the creation, copying, deletion, moving, and opening of a single file, and aids in the creation of <see cref="System.IO.FileStream" /> objects.</summary>
@@ -279,5 +280,35 @@
         /// <param name="path">The path to the file.</param>
         /// <returns>The <see cref="T:System.IO.FileAttributes" /> of the file on the path.</returns>
         System.IO.FileAttributes GetAttributes(string path);
+
+        /// <summary>Gets the creation date and time of the specified file.</summary>
+        /// <returns>A <see cref="T:System.DateTime" /> structure set to the creation date and time for the specified file. This value is expressed in local time.</returns>
+        /// <param name="path">The file for which to obtain creation date and time information.</param>
+        DateTime GetCreationTime(string path);
+
+        /// <summary>Gets the creation date and time, in Coordinated Universal Time (UTC) format, of the specified file.</summary>
+        /// <returns>A <see cref="T:System.DateTime" /> structure set to the creation date and time for the specified file. This value is expressed in UTC time.</returns>
+        /// <param name="path">The file for which to obtain creation date and time information, in Coordinated Universal Time (UTC) format.</param>
+        DateTime GetCreationTimeUtc(string path);
+
+        /// <summary>Gets the date and time that the specified file was last written to.</summary>
+        /// <param name="path">The file for which to obtain write date and time information.</param>
+        /// <returns>A <see cref="T:System.DateTime" /> structure set to the date and time that the specified file was last written to. This value is expressed in local time.</returns>
+        DateTime GetLastWriteTime(string path);
+
+        /// <summary>Gets the date and time, in coordinated universal time (UTC) time, that the specified file was last written to.</summary>
+        /// <param name="path">The file for which to obtain write date and time information.</param>
+        /// <returns>A <see cref="T:System.DateTime" /> structure set to the date and time that the specified file was last written to. This value is expressed in UTC time.</returns>
+        DateTime GetLastWriteTimeUtc(string path);
+
+        /// <summary>Gets the date and time that the specified file was last accessed.</summary>
+        /// <param name="path">The file for which to obtain access date and time information.</param>
+        /// <returns>A <see cref="T:System.DateTime" /> structure set to the date and time that the specified file was last accessed. This value is expressed in local time.</returns>
+        DateTime GetLastAccessTime(string path);
+
+        /// <summary>Gets the date and time, in coordinated universal time (UTC), that the specified file was last accessed.</summary>
+        /// <param name="path">The file for which to obtain access date and time information.</param>
+        /// <returns>A <see cref="T:System.DateTime" /> structure set to the date and time that the specified file was last accessed. This value is expressed in UTC time.</returns>
+        DateTime GetLastAccessTimeUtc(string path);
     }
 }
