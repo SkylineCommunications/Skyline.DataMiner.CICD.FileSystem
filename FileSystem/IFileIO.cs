@@ -2,7 +2,6 @@
 {
     using System;
     using System.Text;
-    using Microsoft.Win32.SafeHandles;
 
     /// <summary>Provides static methods for the creation, copying, deletion, moving, and opening of a single file, and aids in the creation of <see cref="System.IO.FileStream" /> objects.</summary>
     public interface IFileIO
