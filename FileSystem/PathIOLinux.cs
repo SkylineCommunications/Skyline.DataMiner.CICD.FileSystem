@@ -200,13 +200,13 @@ namespace Skyline.DataMiner.CICD.FileSystem
 
                 var unixResult = pathMethod(convertedToUnix);
 
-                if (returnWithRoot)
+                if (returnWithRoot && unixResult != null)
                 {
                     finalResult = removedWindowsRoot[0] + ":" + unixResult.Replace(LinuxSeparator, WindowsSeparator);
                 }
                 else
                 {
-                    finalResult = unixResult.Replace(LinuxSeparator, WindowsSeparator);
+                    finalResult = unixResult?.Replace(LinuxSeparator, WindowsSeparator);
                 }
             }
             else
@@ -215,12 +215,12 @@ namespace Skyline.DataMiner.CICD.FileSystem
                 {
                     var convertedToUnix = path.Replace(WindowsSeparator, LinuxSeparator);
                     var unixResult = pathMethod(convertedToUnix);
-                    finalResult = unixResult.Replace(LinuxSeparator, WindowsSeparator);
+                    finalResult = unixResult?.Replace(LinuxSeparator, WindowsSeparator);
                 }
                 else
                 {
                     finalResult = pathMethod(path);
-                    finalResult = finalResult.Replace(WindowsSeparator, LinuxSeparator);
+                    finalResult = finalResult?.Replace(WindowsSeparator, LinuxSeparator);
                 }
             }
 
