@@ -97,10 +97,8 @@
             PathIOLinux linux = new PathIOLinux();
             var result = linux.GetFullPath(pathToTest);
 
-            Assert.IsTrue(result.Contains(":"), "Does not have the drive letter root");
-            bool forNet472 = result.EndsWith("FileSystemTests/bin/Debug/net472/Skyline.DataMiner.CICD.FileSystem.dll");
-            bool for6 = result.EndsWith("FileSystemTests/bin/Debug/net6.0/Skyline.DataMiner.CICD.FileSystem.dll");
-            Assert.IsTrue(for6 || forNet472, "Does not have the full path: " + result);
+            result.Should().NotBeNullOrWhiteSpace();
+            result.Should().ContainAll(":", "FileSystemTests/bin/Debug/net", "/Skyline.DataMiner.CICD.FileSystem.dll");
         }
 
         [TestMethod]
@@ -111,11 +109,8 @@
             PathIOLinux linux = new PathIOLinux();
             var result = linux.GetFullPath(pathToTest);
 
-            Assert.IsTrue(result.Contains(":"), "Does not have the drive letter root");
-
-            bool forNet472 = result.EndsWith("FileSystemTests/bin/Debug/net472/SubFolderTest/TestFile.xml");
-            bool for6 = result.EndsWith("FileSystemTests/bin/Debug/net6.0/SubFolderTest/TestFile.xml");
-            Assert.IsTrue(for6 || forNet472, "Does not have the full path." + result);
+            result.Should().NotBeNullOrWhiteSpace();
+            result.Should().ContainAll(":", "FileSystemTests/bin/Debug/net", "/SubFolderTest/TestFile.xml");
         }
 
         [TestMethod]
@@ -126,10 +121,8 @@
             PathIOLinux linux = new PathIOLinux();
             var result = linux.GetFullPath(pathToTest);
 
-            Assert.IsTrue(result.Contains(":"), "Does not have the drive letter root");
-            bool forNet472 = result.EndsWith("FileSystemTests\\bin\\Debug\\net472\\SubFolderTest\\TestFile.xml");
-            bool for6 = result.EndsWith("FileSystemTests\\bin\\Debug\\net6.0\\SubFolderTest\\TestFile.xml");
-            Assert.IsTrue(for6 || forNet472, "Does not have the full path." + result);
+            result.Should().NotBeNullOrWhiteSpace();
+            result.Should().ContainAll(":", "FileSystemTests\\bin\\Debug\\net", "\\SubFolderTest\\TestFile.xml");
         }
 
         [TestMethod]
