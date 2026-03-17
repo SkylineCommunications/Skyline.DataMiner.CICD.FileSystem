@@ -17,6 +17,9 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/SkylineCommunications/Skyline.DataMiner.CICD.FileSystem</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <SignAssembly>True</SignAssembly>
+    <DelaySign>False</DelaySign>
+    <AssemblyOriginatorKeyFile>..\StrongName.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -30,7 +33,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <InternalsVisibleTo Include="FileSystemTests" />
+    <InternalsVisibleTo Include="FileSystemTests, PublicKey=002400000480000094000000060200000024000052534131000400000100010035a9e1704481c9042f3e4f298e5d4f8232b6dbde1b342e0148523a0ad054eaa02d6626b7d1bec8ee247376f5ed49bda8b540c3234830247405149f8812f34d4d0fc15dedb5f7147d5a7cc9290b631ec51ee92b4e8e216e7d315c4db3dbbc30121c93205606071e4aa2521a6e660bb6429532e7278efabc0f448c0bef3e4d1aa2" />
   </ItemGroup>
 
 </Project>

@@ -4,6 +4,9 @@
     <TargetFrameworks>net48;net8.0</TargetFrameworks>
     <IsPackable>false</IsPackable>
     <GenerateDocumentationFile>False</GenerateDocumentationFile>
+    <SignAssembly>True</SignAssembly>
+    <DelaySign>False</DelaySign>
+    <AssemblyOriginatorKeyFile>..\StrongName.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <ItemGroup>
