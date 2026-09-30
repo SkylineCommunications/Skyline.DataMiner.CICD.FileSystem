@@ -9,6 +9,12 @@
     [TestClass]
     public class PathIOLinuxTests
     {
+#if DEBUG
+        private const string ConfigurationDirectory = "Debug";
+#else
+        private const string ConfigurationDirectory = "Release";
+#endif
+
         [TestMethod]
         public void ChangeExtensionTest_Linux()
         {
@@ -98,7 +104,7 @@
             var result = linux.GetFullPath(pathToTest);
 
             result.Should().NotBeNullOrWhiteSpace();
-            result.Should().ContainAll(":", "FileSystemTests/bin/Debug/net", "/Skyline.DataMiner.CICD.FileSystem.dll");
+            result.Should().ContainAll(":", $"FileSystemTests/bin/{ConfigurationDirectory}/net", "/Skyline.DataMiner.CICD.FileSystem.dll");
         }
 
         [TestMethod]
@@ -110,7 +116,7 @@
             var result = linux.GetFullPath(pathToTest);
 
             result.Should().NotBeNullOrWhiteSpace();
-            result.Should().ContainAll(":", "FileSystemTests/bin/Debug/net", "/SubFolderTest/TestFile.xml");
+            result.Should().ContainAll(":", $"FileSystemTests/bin/{ConfigurationDirectory}/net", "/SubFolderTest/TestFile.xml");
         }
 
         [TestMethod]
@@ -122,7 +128,7 @@
             var result = linux.GetFullPath(pathToTest);
 
             result.Should().NotBeNullOrWhiteSpace();
-            result.Should().ContainAll(":", "FileSystemTests\\bin\\Debug\\net", "\\SubFolderTest\\TestFile.xml");
+            result.Should().ContainAll(":", $"FileSystemTests\\bin\\{ConfigurationDirectory}\\net", "\\SubFolderTest\\TestFile.xml");
         }
 
         [TestMethod]
